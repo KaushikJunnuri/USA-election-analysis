@@ -7,7 +7,10 @@ logging.basicConfig(level=logging.INFO,format='[%(asctime)s]: %(message)s:')
 project_name='Usa_elections'
 
 list_of_files = [
-    ".github/workflows/.gitkeep", #like a placholder since empty folders cannot be pushed
+    ".github/workflows/.gitkeep",
+    "airflow-dags/dags/common.py",
+    "airflow-dags/dags/us_elections_pipeline.py",
+    "sql",
     f'src/{project_name}/__init__.py',
     f'src/{project_name}/components/__init__.py',
     f'src/{project_name}/utils/__init__.py',
@@ -20,6 +23,7 @@ list_of_files = [
     f'src/{project_name}/constants/__init__.py',
     "config/config.yaml",
     "params.yaml",
+    "driver.py",
     "app.py",
     "main.py",
     "DockerFile",
