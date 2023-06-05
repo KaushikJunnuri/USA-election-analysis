@@ -1,16 +1,10 @@
 import logging
 import wikipediaapi
 import pandas as pd
+import time
 
 # create a function to get the titles based on keyword
-article_titles=['2020 United States presidential election',
-   '2016 United States presidential election',
-   '2012 United States presidential election',
-   '2008 United States presidential election',
-   '2004 United States presidential election',
-   '2014 United States presidential election',
-   '2000 United States presidential election'
-   ]
+article_titles=[f'{e_year} United States presidential election' for e_year in range(1900,2020,4)]
 
 def wiki_crawler():
     raw_wiki= wikipediaapi.Wikipedia(
@@ -19,6 +13,8 @@ def wiki_crawler():
     )
     wiki_article_summary={}
     for article in article_titles:
+        # if article[:4]=='1960':  # To avoid out repeated HTTP calls
+        #     time.sleep(5)
         if raw_wiki.page(article).exists():
             article_desc = raw_wiki.page(article).summary
             wiki_article_summary[article] = article_desc
@@ -28,5 +24,5 @@ def wiki_crawler():
     df = pd.DataFrame(wiki_article_summary.items(), columns=['title','summary'])
     return df
 
-raw_wiki_data = wiki_crawler()
-#raw_wiki_data.to_csv("wiki_data.csv")
+# raw_wiki_data = wiki_crawler()
+# raw_wiki_data.to_csv("wiki_data_20thCentury.csv")
