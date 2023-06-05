@@ -1,5 +1,6 @@
 import logging
 import wikipediaapi
+import pandas as pd
 
 # create a function to get the titles based on keyword
 article_titles=['2020 United States presidential election',
@@ -24,3 +25,8 @@ def wiki_crawler():
         else:
             logging.basicConfig(level=logging.INFO,format='[%(asctime)s]: %(message)s:')
             continue
+    df = pd.DataFrame(wiki_article_summary.items(), columns=['title','summary'])
+    return df
+
+raw_wiki_data = wiki_crawler()
+#raw_wiki_data.to_csv("wiki_data.csv")
